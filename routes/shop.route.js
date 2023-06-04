@@ -1,20 +1,24 @@
 // Importando el enrutador de express
 import { Router } from 'express';
-// Importando el gestor de rutas
-import path from 'path';
+
+// Importando el arreglo de productos
+import { products } from './admin.route.js';
 
 // Creando una instancia del enrutador de express
 const router = Router();
-// Importando productos
-import { products } from './admin.route.js';
+
+
 // GET /
 router.get('/', (req, res)=>{
   // Mostrando productos en memoria
   console.log(products);
   console.log("📢 Sirviendo la ruta '/'");
-  res.render('shop', {shop: 'active', docTitle:"Shop"});
-  //res.render('shop',{layout: false});
-  //res.sendFile(path.resolve('views','shop.html'));
+  res.render('shop', { 
+    shop: 'active', 
+    docTitle:"Shop",
+    viewStyle: '/css/product.css',
+    products
+  });
 });
 
 // GET /about
@@ -26,5 +30,4 @@ router.get('/about', (req, res) => {
     <p>App for Fullstack Web Dev Course I!</p>
   `);
 });
-
 export default router;
